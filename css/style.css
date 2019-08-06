@@ -1,0 +1,115 @@
+
+header {
+    background-color: lightsalmon;
+}
+
+nav>p {
+    margin: 20px;
+    display: inline-block;
+
+}
+nav>p:hover {
+    background-color: pink;
+    
+}
+
+nav>img {
+    width: 30%;
+} 
+
+
+
+body {
+    background-color: lightcyan;
+    text-align: center;
+}
+
+h1 {
+    font-size: 4em;
+    text-shadow: 2px 2px 3px 4px black;
+    background-color: grey;
+    border-radius: 10px;
+    opacity: .7;
+}
+
+#text-left {
+    text-align: left;
+    line-height: 1.5em;
+    width: 80%;
+}
+
+h2,h3 {
+    font-size: 3em;
+    margin: 1em;
+    text-shadow: 2px 2px 3px 4px black;
+    background-color: grey;
+    border-radius: 10px;
+    opacity: .5;
+    clear: both;
+    padding: 0.5em;
+}
+
+p {
+    font-size: 1.3em;
+    line-height: 1em;
+    padding: 1em;
+}
+
+#name-with-background-image {
+    margin: 5em;
+    /* Needs background image */
+}
+
+.fish-pic-row {
+    margin: 1em;
+    height: 10em;
+}
+
+#family-pic {
+    height: 15em;
+    float: left;
+    margin-bottom: 2em;
+    margin-left: 10%;
+    margin-right: 5%;
+}
+
+#address, #hours, #address {
+    float: left;
+    width: 40%;
+    margin: 2em;
+}
+
+table {
+    margin: auto;
+    line-height: 1.5em;
+    border: 0.25em groove salmon;
+    background-color:lightyellow;
+}
+
+form {
+    margin: auto;
+    padding: 2em;
+}
+
+ul {
+    list-style-type: disc;
+}
+
+ol {
+    list-style-type: decimal;
+}
+
+td, th {
+    padding: 1em;
+}
+
+th {
+    font-weight: bold;
+}
+
+footer {
+    margin: 2em;
+}
+img {
+    border-radius: 5px;
+}
