@@ -131,14 +131,6 @@ formEl.addEventListener('submit', handleClick);
 //======= FUNCTIONS ========
 // makes table header
 function makeHeader(){
-  $(function(){
-    var val = $('table').html();
-    alert(val);
-  });
-
-  // var trEl = document.createElement('tr');
-  // tableEl.appendChild(trEl);
-
 
   // iterates through time, so each column header is filled with i from time of day
   $(function(){
@@ -147,12 +139,15 @@ function makeHeader(){
     for(var i = 0; i < time.length; i++){
       $('#header-row').append('<th>' + time[i] + '</th>');
     }
+    $('#header-row').append('<th>' + 'Location Total' + '</th>');
   });
 
+  // alert box for testing JQuery
+  $(function(){
+    var val = $('table').html();
+    alert(val);
+  });
 
-  // Daily Location Total Header
-  //addElement('th', 'Location Total', trEl);
-  
 }
 
 
