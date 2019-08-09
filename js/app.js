@@ -1,10 +1,7 @@
 'use strict';
 
-// TO DO:
-// - Build helper function for building a table
-
 // array of hours
-var time = ['6am', '7am', '8am', '9am', '10am', '11am', '12am', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
+var time = ['', '6am', '7am', '8am', '9am', '10am', '11am', '12am', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 var allLocations = [];
 var tableEl = document.getElementById('table');
 var totalOfTotals = 0;
@@ -60,15 +57,13 @@ BusinessLocation.prototype.renderTableContent = function() {
 
   var trEl = document.createElement('tr');
   tableEl.appendChild(trEl);
-
-  // Render location names - fills in column 1 - uses helper function
+  
   addElement('td', this.name, trEl);
 
-  // Render cookies per hour - fills in body of table with numbers
+ 
   for (var i = 0; i < this.cookieNumPerHr.length; i++){
     addElement('td', this.cookieNumPerHr[i], trEl);
   }
-  // Render the cookie total per location - fills in bottom row for each column
   addElement('td', this.totalCookies, trEl);
 };
 
@@ -136,19 +131,23 @@ formEl.addEventListener('submit', handleClick);
 //======= FUNCTIONS ========
 // makes table header
 function makeHeader(){
-  var trEl = document.createElement('tr');
-  tableEl.appendChild(trEl);
-
-  // makes one empty header cell, so 6am is pushed one to the right
-  addElement('th', '', trEl);
 
   // iterates through time, so each column header is filled with i from time of day
-  for(var i = 0; i < time.length; i++){
-    addElement('th', time[i], trEl);
-  }
+  $(function(){
+    $('#table').before('<tr></tr>');
+    $('tr').attr('id', 'header-row');
+    for(var i = 0; i < time.length; i++){
+      $('#header-row').append('<th>' + time[i] + '</th>');
+    }
+    $('#header-row').append('<th>' + 'Location Total' + '</th>');
+  });
 
-  // Daily Location Total Header
-  addElement('th', 'Location Total', trEl);
+  // alert box for testing JQuery
+  $(function(){
+    var val = $('table').html();
+    alert(val);
+  });
+
 }
 
 
