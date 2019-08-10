@@ -1,7 +1,7 @@
 'use strict';
 
 // array of hours
-var time = ['', '6am', '7am', '8am', '9am', '10am', '11am', '12am', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
+var time = ['6am', '7am', '8am', '9am', '10am', '11am', '12am', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 var allLocations = [];
 var tableEl = document.getElementById('table');
 var totalOfTotals = 0;
@@ -51,21 +51,30 @@ BusinessLocation.prototype.generateCookiesPerHour = function(){
 
 
 
-// Renders location names, cookies per hour (the body of the table) and cookie total per location
+// Renders: location names, cookies per hour and cookie total per location
 BusinessLocation.prototype.renderTableContent = function() {
   this.generateCookiesPerHour();
 
-  var trEl = document.createElement('tr');
-  tableEl.appendChild(trEl);
-  
-  addElement('td', this.name, trEl);
+  // var trEl = document.createElement('tr');
+  // tableEl.appendChild(trEl);
+  // addElement('td', this.name, trEl);
 
+  // The following doesn't work - attempting to access each instance within the object constructor and apply to JQuery:
+  // $(function(){
+  //   $.extend(BusinessLocation);
+  //   $('#header-row').after('<tr><td>' + this.name + '</td></tr>'); 
+  // });
+
+  
  
-  for (var i = 0; i < this.cookieNumPerHr.length; i++){
-    addElement('td', this.cookieNumPerHr[i], trEl);
-  }
-  addElement('td', this.totalCookies, trEl);
+ 
+  // for (var i = 0; i < this.cookieNumPerHr.length; i++){
+  //   addElement('td', this.cookieNumPerHr[i], trEl);
+  // }
+  // addElement('td', this.totalCookies, trEl);
 };
+
+
 
 
 //======= INSTANCES ========
@@ -93,13 +102,14 @@ function handleClick(event){
   new BusinessLocation(name, minPerCust, maxPerCust, avgCookiePerSale);
   console.log('allLocations: ', allLocations);
 
-  // remove original data from table, so table can refresh with updated location and data
+  // removes original data from table, so table can refresh with updated location and data
   tableEl.innerHTML='';
-  console.log('allLocations: ', allLocations);
+  $(function(){
+    $('#table').html('');
+  });
 
   // re-render table
   renderAll();
-  console.log('supposed to have rendered everything!');
 }
 
 
@@ -112,12 +122,9 @@ function makesRandomNumber(min, max){
 }
 
 // helper function to make a table
-// got this function from fellow developer, James Dansie
 function addElement(childElType, childContent, parentEl){
   var childEl = document.createElement(childElType);
-  // set textcontent
   childEl.textContent = childContent;
-  // define who the parent is:
   parentEl.appendChild(childEl);
 }
 
@@ -131,8 +138,6 @@ formEl.addEventListener('submit', handleClick);
 //======= FUNCTIONS ========
 // makes table header
 function makeHeader(){
-
-  // iterates through time, so each column header is filled with i from time of day
   $(function(){
     $('#table').before('<tr></tr>');
     $('tr').attr('id', 'header-row');
@@ -140,14 +145,8 @@ function makeHeader(){
       $('#header-row').append('<th>' + time[i] + '</th>');
     }
     $('#header-row').append('<th>' + 'Location Total' + '</th>');
+    $('#header-row').prepend('<th>' + '' + '</th>');
   });
-
-  // alert box for testing JQuery
-  $(function(){
-    var val = $('table').html();
-    alert(val);
-  });
-
 }
 
 
@@ -209,3 +208,11 @@ function renderAll(){
 
 // Render Everything
 renderAll();
+
+
+
+//  // alert box for testing JQuery
+//  $(function(){
+//   var val = $('table').html();
+//   alert(val);
+// });
