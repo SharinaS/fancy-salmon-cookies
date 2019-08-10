@@ -55,22 +55,15 @@ BusinessLocation.prototype.generateCookiesPerHour = function(){
 BusinessLocation.prototype.renderTableContent = function() {
   this.generateCookiesPerHour();
 
-  // var trEl = document.createElement('tr');
-  // tableEl.appendChild(trEl);
-  // addElement('td', this.name, trEl);
+  var locationThis = this.name;
+  // Add location names:
+  $(function(){
+    $('#header-row').after('<tr><td>' + locationThis + '</td></tr');
+  });
 
-  // The following doesn't work - attempting to access each instance within the object constructor and apply to JQuery:
-  // $(function(){
-  //   $.extend(BusinessLocation);
-  //   $('#header-row').after('<tr><td>' + this.name + '</td></tr>'); 
-  // });
+  // Add cookie numbers to table body
+ 
 
-  
- 
- 
-  // for (var i = 0; i < this.cookieNumPerHr.length; i++){
-  //   addElement('td', this.cookieNumPerHr[i], trEl);
-  // }
   // addElement('td', this.totalCookies, trEl);
 };
 
@@ -144,8 +137,7 @@ function makeHeader(){
     for(var i = 0; i < time.length; i++){
       $('#header-row').append('<th>' + time[i] + '</th>');
     }
-    $('#header-row').append('<th>' + 'Location Total' + '</th>');
-    $('#header-row').prepend('<th>' + '' + '</th>');
+    $('#header-row').append('<th>' + 'Location Total' + '</th>').prepend('<th>' + '' + '</th>');
   });
 }
 
@@ -167,6 +159,12 @@ function makeFooter(){
   }
   // render grand total for Location Total column
   addElement('td', totalOfTotals, trEl);
+
+  // alert box for testing JQuery
+  $(function(){
+    var val = $('table').html();
+    alert(val);
+  });
 }
 
 
