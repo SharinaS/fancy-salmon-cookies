@@ -1,5 +1,9 @@
 'use strict';
 
+
+// STUCK:
+/* If I go the strategy of trying to render the object array of cookieNumPerHour, it says undefined, but is in the correct location. If I go the strategy of trying to move the code rendered in JQuery (the header and the locations, I can't get it to correctly line up with the cookie data) */
+
 // array of hours
 var time = ['6am', '7am', '8am', '9am', '10am', '11am', '12am', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 var allLocations = [];
@@ -50,21 +54,32 @@ BusinessLocation.prototype.generateCookiesPerHour = function(){
 };
 
 
+// Renders: location names
+BusinessLocation.prototype.renderTableLocations = function(){
+  var locationThis = this.name;
+  $(function(){
+    $('#table').append('<tr><td class = "location-data">' + locationThis + '</td></tr');
+  });
+};
 
-// Renders: location names, cookies per hour and cookie total per location
+
+// Renders: cookies per hour and cookie total per location
 BusinessLocation.prototype.renderTableContent = function() {
   this.generateCookiesPerHour();
+  this.renderTableLocations();
 
-  var locationThis = this.name;
-  // Add location names:
-  $(function(){
-    $('#header-row').after('<tr><td>' + locationThis + '</td></tr');
-  });
+  var trEl = document.createElement('tr');
+  trEl.setAttribute('class', 'cookie-data');
+  tableEl.appendChild(trEl);
 
-  // Add cookie numbers to table body
- 
-
-  // addElement('td', this.totalCookies, trEl);
+  // Render cookies per hour - fills in body of table with numbers
+// Render cookies per hour - fills in body of table with numbers
+for (var i = 0; i < this.cookieNumPerHr.length; i++){
+  addElement('td', this.cookieNumPerHr[i], trEl);
+}
+// Render the cookie total per location - fills in bottom row for each column
+addElement('td', this.totalCookies, trEl);
+  
 };
 
 
@@ -132,8 +147,7 @@ formEl.addEventListener('submit', handleClick);
 // makes table header
 function makeHeader(){
   $(function(){
-    $('#table').before('<tr></tr>');
-    $('tr').attr('id', 'header-row');
+    $('#table').append('<tr id = "header-row"></tr>');
     for(var i = 0; i < time.length; i++){
       $('#header-row').append('<th>' + time[i] + '</th>');
     }
@@ -206,11 +220,3 @@ function renderAll(){
 
 // Render Everything
 renderAll();
-
-
-
-//  // alert box for testing JQuery
-//  $(function(){
-//   var val = $('table').html();
-//   alert(val);
-// });
